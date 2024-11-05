@@ -12,15 +12,6 @@ class Product(ABC):
         pass
 
 
-class PaymentProcessor(ABC):
-    def connection_checker():
-        print("Connected successfully")
-
-    @abstractmethod
-    def process_payment(self, amount):
-        pass
-
-
 class Book(Product):
     def calculate_price(self):
         tax = 0.1  # 10% tax for books
@@ -33,6 +24,15 @@ class Electronics(Product):
         tax = 0.2  # 20% tax for electronics
         final_price = self.base_price * (1 + tax)
         return final_price
+
+
+class PaymentProcessor(ABC):
+    def connection_checker():
+        print("Connected successfully")
+
+    @abstractmethod
+    def process_payment(self, amount):
+        pass
 
 
 class CreditCardProcessor(PaymentProcessor):
