@@ -1,42 +1,51 @@
-from abc import ABC, abstractmethod
-import math
+class LibrarySystem:
+    borrow_count = 0
+
+    def __init__(self, title, publication_date):
+        self.title = title
+        self.publication_date = publication_date
+
+    def borrow_item(self):
+        self.borrow_count += 1
+
+    def display_details(self):
+        print(f"Title: {self.title}, Publication Date: {self.publication_date}")
 
 
-class Shape(ABC):
-    @abstractmethod
-    def area(self):
-        pass
+class Book(LibrarySystem):
+    borrow_count = 0
 
-    @abstractmethod
-    def perimeter(self):
-        pass
+    def __init__(self, title, publication_date, author):
+        super().__init__(title, publication_date)
+        self.author = author
 
+    def borrow_item(self):
+        super().borrow_item()
+        self.borrow_item += 1
 
-class Circle(Shape):
-    def __init__(self, radius):
-        self.radius = radius
-
-    def area(self):
-        return math.pi * (self.radius**2)
-
-    def perimeter(self):
-        return 2 * math.pi * self.radius
+    def display_details(self):
+        super().display_details()
+        print(f"Author: {self.author}")
 
 
-class Rect(Shape):
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
+class Magzine(LibrarySystem):
+    borrow_count = 0
 
-    def area(self):
-        return self.width * self.height
+    def __init__(self, title, publication_date, volume):
+        super().__init__(title, publication_date)
+        self.volume = volume
 
-    def perimeter(self):
-        return 2 * (self.width + self.height)
+    def borrow_item(self):
+        super().borrow_item()
+        self.borrow_item += 1
+
+    def display_details(self):
+        super().display_details()
+        print(f"Volume: {self.volume}")
 
 
-rect = Rect(4, 5)
-circle = Circle(3)
+book1 = Book("Pragmatic Programmer", "2024", "John doe")
+book2 = Book("Pragmatic Programmer 2", "2030", "John doe")
 
-print("Rectangle - Area:", rect.area(), ", Perimeter:", rect.perimeter())
-print("Circle - Area:", circle.area(), ", Perimeter:", circle.perimeter())
+book1.borrow_item()
+book2.borrow_item()
